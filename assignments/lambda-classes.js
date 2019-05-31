@@ -19,26 +19,27 @@ class Instructor extends Person {
         this.catchPhrase = attr.catchPhrase;
     }
     demo(subject) {
-        console.log(`Today we are learning about ${this.subject}.`)
+        console.log(`Today we are learning about ${subject}.`)
     }
     gradeAssignment(student, subject) {
         console.log(`${student.name} receives a perfect score on ${subject}.`)
     }
     adjustGrade(student) {
+        console.log(`${student.name}'s grade before: ${student.grade}`);
         let num = Math.floor(Math.random() * 99) + 1;
         num *= Math.floor(Math.random() * 2) == 1 ? 1 : -1;
-        if (this.num > 0) {
-            console.log(`${this.name} adds ${num} points.`)
-        } else {
-            console.log(`${this.name} deducts ${num} points`)
-        }
+        console.log(`${this.name} adds ${num} points.`);
         let newGrade = student.grade;
         newGrade += num;
-        console.log(`${student.name}'s new grade: ${student.newGrade}. `)
-        if (newGrade > 70) {
-            console.log(`Congratulations, ${student.name}! You've graduated from lambda! You're the bee's knees homie!`);
+        console.log(`${student.name}'s new grade: ${newGrade}. `)
+        if (student.grade > 70) {
+            console.log("You've graduated already, get out of here!");
         } else {
-            adjustGrade(student);
+            if (newGrade > 70) {
+                console.log(`Congratulations, ${student.name}! You've graduated from lambda! You're the bee's knees homie!`);
+            } else {
+                console.log("Keep trying more assignments to bring your grade up");
+            }
         }
     }
 }
@@ -79,7 +80,19 @@ class ProjectManager extends Instructor {
 }
 
 
-const test = new Student({ name: "Geff", favSubjects: ["JFV", "Nev"] });
+const jeff = new Student({ name: "Jeff", favSubjects: ["JFV", "Nev"], location: "Jamaica" });
 
-test.PRAssignment("Django");
-test.sprintChallenge("Django");
+const mason = new Instructor({ name: "Mason", location: "New York" });
+
+const rebecca = new ProjectManager({ name: "Rebecca", location: "St Louis" });
+
+jeff.speak();
+rebecca.speak();
+mason.speak();
+jeff.PRAssignment("Django");
+mason.demo("C#");
+rebecca.debugsCode(jeff, "C#")
+mason.adjustGrade(jeff);
+mason.adjustGrade(jeff);
+mason.adjustGrade(jeff);
+mason.adjustGrade(jeff);
